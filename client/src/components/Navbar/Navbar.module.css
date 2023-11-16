@@ -1,0 +1,52 @@
+@font-face {
+  font-family: "Splash";
+  src: url("https://fonts.googleapis.com/css2?family=Splash&display=swap");
+  font-weight: normal;
+  font-style: normal;
+}
+.header {
+  background: rgb(252, 252, 252);
+  background: linear-gradient(
+    90deg,
+    rgba(252, 252, 252, 1) 14%,
+    rgba(157, 217, 255, 1) 38%,
+    rgba(35, 138, 251, 1) 100%
+  );
+  color: #fff;
+  padding: 5px;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo img {
+  height: 2.5rem;
+  margin-left: 1rem;
+}
+.logo span {
+  color: rgba(35, 138, 251, 1);
+  font-family: monospace;
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  margin: 0 10px;
+}
+
+.link {
+  text-decoration: none;
+  color: #fff;
+}
+
+.link:hover {
+  border-bottom: 2px solid #fff;
+}

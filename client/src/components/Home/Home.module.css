@@ -1,0 +1,43 @@
+.home-content {
+  position: relative;
+  display: flex;
+
+  /* justify-content: center; /* Center horizontally */
+  /* align-items: center; Center vertically */
+  flex-direction: column; /* Stack elements vertically */
+  height: 90vh;
+}
+
+.home-content-text {
+  margin-left: 10rem;
+  text-align: left;
+
+  z-index: 1;
+}
+
+.home-content-text h1,
+.home-content-text p {
+  color: rgb(255, 255, 255);
+}
+.home-content-text h1 {
+  font-size: 2rem;
+}
+.home-content-text p {
+  font-size: 1.5rem;
+  width: 600px;
+}
+
+.create-task-btn:link,
+.create-task-btn:visited {
+  text-decoration: none;
+  color: #fff;
+  font-size: 1.3rem;
+  background-color: #085bb4;
+  padding: 15px 20px;
+  border-radius: 5px;
+  display: inline-block;
+  margin-top: 10px;
+  position: relative;
+  outline: none;
+  border: solid #085bb4 1px;
+}
