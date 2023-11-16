@@ -14,10 +14,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
-          {/* <CreateGame></CreateGame> */}
-          {/* <Register></Register> */}
-          {/* <Catalog></Catalog> */}
-          {/* <Login /> */}
         </Routes>
       </main>
       <Footer />
