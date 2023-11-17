@@ -1,9 +1,3 @@
-@font-face {
-  font-family: "Splash";
-  src: url("https://fonts.googleapis.com/css2?family=Splash&display=swap");
-  font-weight: normal;
-  font-style: normal;
-}
 .header {
   background: rgb(252, 252, 252);
   background: linear-gradient(
@@ -19,16 +13,22 @@
 nav {
   display: flex;
   justify-content: space-between;
+  margin-right: 7rem;
   align-items: center;
+  font-size: 1.1rem;
 }
-
+.center-text {
+  display: flex;
+}
 .logo img {
   height: 2.5rem;
   margin-left: 1rem;
 }
 .logo span {
   color: rgba(35, 138, 251, 1);
-  font-family: monospace;
+  font-family: "Agbalumo";
+  font-size: 1.2rem;
+  align-self: center;
 }
 
 ul {
@@ -44,9 +44,13 @@ li {
 
 .link {
   text-decoration: none;
-  color: #fff;
+  color: aliceblue;
+  padding-bottom: 5px;
+
+  transition: all ease-in 0.1s;
+  border-bottom: 2px solid transparent;
 }
 
 .link:hover {
-  border-bottom: 2px solid #fff;
+  border-bottom: 2px solid aliceblue;
 }

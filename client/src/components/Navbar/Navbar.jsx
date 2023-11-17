@@ -5,7 +5,7 @@ export default function Navbar() {
     <header className={styles.header}>
       <nav className={styles.nav}>
         <section className={styles.logo}>
-          <Link className={styles.link} to="/">
+          <Link className={`${styles.link} ${styles["center-text"]}`} to="/">
             <img src="/images/logo.png" alt="logo" />
             <span>Taskify</span>
           </Link>

@@ -6,16 +6,18 @@ import Home from "./components/Home/Home";
 import Footer from "./components/Footer/Footer";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
+import CreateTask from "./components/CreateTask/CreateTask";
 
 function App() {
   return (
     <div>
       <Navbar />
-      <main id="content">
+      <main className="content">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/create" element={<CreateTask />} />
         </Routes>
       </main>
       <Footer />
