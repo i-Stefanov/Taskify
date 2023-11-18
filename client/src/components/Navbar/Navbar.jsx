@@ -40,11 +40,7 @@ export default function Navbar() {
           {isAuthenticated && (
             <>
               {/* <!--Only Users--> */}
-              <li>
-                <Link className={styles.link} to={`/users/${userId}`}>
-                  {username}
-                </Link>
-              </li>
+
               <li>
                 <Link className={styles.link} to="/tasklist">
                   Tasks
@@ -59,6 +55,11 @@ export default function Navbar() {
               <li>
                 <Link className={styles.link} to="/logout">
                   Logout
+                </Link>
+              </li>
+              <li>
+                <Link className={styles.link} to={`/users/${userId}`}>
+                  {username}
                 </Link>
               </li>
             </>
