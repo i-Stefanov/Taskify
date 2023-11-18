@@ -9,8 +9,8 @@ export default function Home() {
           Welcome to our task manager app. Keep track of your tasks and stay
           organized with ease. Never miss a deadline again.
         </p>
-        <Link to="/create" className={styles["create-task-btn"]}>
-          Create a Task
+        <Link to="/register" className={styles["create-task-btn"]}>
+          Become productive!
         </Link>
       </article>
     </section>
