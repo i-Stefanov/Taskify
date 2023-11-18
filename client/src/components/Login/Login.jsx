@@ -16,7 +16,7 @@ export default function Login() {
   return (
     <section className={styles.loginPage}>
       <form className={styles.loginForm} method="POST" onSubmit={onSubmit}>
-        <img src="../../../public/images/logo.png" alt="logo" />
+        <img src="/images/logo.png" alt="logo" />
         <h2>Login</h2>
 
         <div>
