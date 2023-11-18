@@ -5,8 +5,9 @@ import { tasks, testUser } from "./assets/dummyData";
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./components/Home/Home";
 import Footer from "./components/Footer/Footer";
-import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
+import Login from "./components/Login/Login";
+import Logout from "./components/Logout/Logout";
 import CreateTask from "./components/CreateTask/CreateTask";
 import TaskList from "./components/TaskList/TaskList";
 import TaskCard from "./components/TaskCard/TaskCard";
@@ -32,8 +33,25 @@ function App() {
       console.log(error);
     }
   };
+  const onLoginSubmit = async (data) => {
+    try {
+      const result = await authService.login(data);
+      console.log(result);
+      navigate("/");
+      return result;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // const onLogout = async () => {
+  //   // todo authorized request
+  //   // await authService.logout();
+  //   setAuth({});
+  // };
   const context = {
     onRegisterSubmit,
+    onLoginSubmit,
+    // onLogout,
     userId: auth._id,
     token: auth.accessToken,
     userEmail: auth.email,
@@ -50,6 +68,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            {/* <Route path="/logout" element={<Logout />} /> */}
             <Route path="/create" element={<CreateTask />} />
             <Route path="/users/:userId" element={<User user={testUser} />} />
             <Route path="/tasklist" element={<TaskList tasks={tasks} />} />
