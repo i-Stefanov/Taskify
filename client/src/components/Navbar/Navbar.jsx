@@ -1,6 +1,8 @@
 import styles from "./Navbar.module.css";
 import { Link } from "react-router-dom";
 export default function Navbar() {
+  const userId = 1;
+  const username = "Gosho";
   return (
     <header className={styles.header}>
       <nav className={styles.nav}>
@@ -11,6 +13,12 @@ export default function Navbar() {
           </Link>
         </section>
         <ul>
+          {/* only if there is a logged in user */}
+          <li>
+            <Link className={styles.link} to={`/users/${userId}`}>
+              {username}
+            </Link>
+          </li>
           {/* <!--Users and Guest--> */}
           <li>
             <Link className={styles.link} to="/">
@@ -39,6 +47,7 @@ export default function Navbar() {
               Create Task
             </Link>
           </li>
+
           <li>
             <Link className={styles.link} to="/logout">
               Logout
