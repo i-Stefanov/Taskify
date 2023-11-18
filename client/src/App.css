@@ -5,7 +5,6 @@ body {
   display: flex;
   flex-direction: column;
   background: url("/images/newBGIMAGE.avif") center/cover no-repeat;
-  overflow: hidden;
 }
 body::before {
   content: "";

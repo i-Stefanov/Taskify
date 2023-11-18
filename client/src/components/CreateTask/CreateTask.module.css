@@ -18,9 +18,9 @@
   background: rgb(252, 252, 252);
   background: linear-gradient(
     180deg,
-    rgba(252, 252, 252, 1) 0%,
-    rgba(157, 215, 255, 1) 44%,
-    rgba(35, 138, 251, 1) 95%
+    rgba(252, 252, 252, 0.8) 0%,
+    rgba(157, 215, 255, 0.8) 44%,
+    rgba(35, 138, 251, 0.8) 95%
   );
   /* align-items: center; */
   justify-content: center;
@@ -37,7 +37,7 @@ input,
 select,
 textarea {
   /* outline: 2px solid #0056b3; */
-  box-shadow: 0.3em 0.3em 0.1em rgba(15, 2, 99, 0.5);
+  box-shadow: 0.3em 0.3em 0.1em rgba(15, 2, 99, 0.3);
   /* outline: 2px solid transparent; */
   transition: all ease-in 0.1s;
 }

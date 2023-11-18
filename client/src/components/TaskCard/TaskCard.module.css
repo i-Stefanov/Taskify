@@ -1,0 +1,43 @@
+.taskCard {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px;
+  max-width: 300px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: rgb(252, 252, 252);
+  background: linear-gradient(
+    180deg,
+    rgba(252, 252, 252, 0.8) 0%,
+    rgba(157, 215, 255, 0.8) 44%,
+    rgba(35, 138, 251, 0.8) 95%
+  );
+  z-index: 1;
+}
+
+.taskName {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+}
+
+.dueDate,
+.priority {
+  margin-bottom: 8px;
+}
+
+.description {
+  color: #555;
+}
+.actions {
+  display: flex;
+  gap: 1rem;
+}
+.detailsLink {
+  color: aliceblue;
+  text-decoration: none;
+  font-weight: bold;
+  border: 2px solid #007bff;
+  background-color: #007bff;
+  border-radius: 4px;
+  padding: 3px;
+}
