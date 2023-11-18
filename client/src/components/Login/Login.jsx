@@ -1,10 +1,21 @@
 import { Link } from "react-router-dom";
 import styles from "./Login.module.css";
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
+import { useForm } from "../../hooks/useForm";
 
 export default function Login() {
+  const { onLoginSubmit } = useContext(AuthContext);
+  const { values, changeHandler, onSubmit } = useForm(
+    {
+      email: "",
+      password: "",
+    },
+    onLoginSubmit
+  );
   return (
     <section className={styles.loginPage}>
-      <form className={styles.loginForm}>
+      <form className={styles.loginForm} method="POST" onSubmit={onSubmit}>
         <img src="../../../public/images/logo.png" alt="logo" />
         <h2>Login</h2>
 
@@ -15,7 +26,8 @@ export default function Login() {
             name="email"
             type="text"
             placeholder="name@abv.bg"
-            value=""
+            value={values.username}
+            onChange={changeHandler}
           />
         </div>
 
@@ -26,7 +38,8 @@ export default function Login() {
             name="password"
             type="password"
             placeholder="********"
-            value=""
+            value={values.password}
+            onChange={changeHandler}
           />
         </div>
 
