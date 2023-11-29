@@ -6,16 +6,11 @@ import { useTaskContext } from "../../contexts/TaskContext";
 
 export default function CreateTask() {
   const { onCreateTaskSubmit } = useTaskContext();
-  // set initial values to the state variables
-  const [taskPriority, setTaskPriority] = useState("");
-  const taskPriorityChange = (e) => {
-    setTaskPriority(e.target.value);
-  };
 
   const { values, changeHandler, onSubmit } = useForm(
     {
       taskName: "",
-      taskPriority,
+      taskPriority: "",
       description: "",
       dueDate: "",
     },
@@ -66,8 +61,8 @@ export default function CreateTask() {
               <select
                 id="taskPriority"
                 name="taskPriority"
-                value={taskPriority}
-                onChange={taskPriorityChange}
+                value={values.taskPriority}
+                onChange={changeHandler}
               >
                 <option value="high">High</option>
                 <option value="medium">Medium</option>
