@@ -14,27 +14,30 @@ import TaskCard from "./components/TaskCard/TaskCard";
 import User from "./components/UserProfile/UserPrifile";
 import { AuthProvider } from "./contexts/AuthContext";
 import { authServiceFactory } from "./services/authService";
+import { TaskProvider } from "./contexts/taskContext";
 
 function App() {
   return (
     <AuthProvider>
-      <div>
-        <Navbar />
-        <main className="content">
-          <Routes>
-            <Route index element={<Home />} />
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/logout" element={<Logout />} />
-            <Route path="/create" element={<CreateTask />} />
-            <Route path="/users/:userId" element={<User user={testUser} />} />
-            <Route path="/tasklist" element={<TaskList tasks={tasks} />} />
-            <Route path="/tasklist/:taskId" element={<TaskCard />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
+      <TaskProvider>
+        <div>
+          <Navbar />
+          <main className="content">
+            <Routes>
+              <Route index element={<Home />} />
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/logout" element={<Logout />} />
+              <Route path="/create" element={<CreateTask />} />
+              <Route path="/users/:userId" element={<User user={testUser} />} />
+              <Route path="/tasklist" element={<TaskList />} />
+              <Route path="/tasklist/:taskId" element={<TaskCard />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </TaskProvider>
     </AuthProvider>
   );
 }

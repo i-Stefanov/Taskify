@@ -1,45 +1,30 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./CreateTask.module.css";
+import { useForm } from "../../hooks/useForm";
+import { useTaskContext } from "../../contexts/taskContext";
 
 export default function CreateTask() {
-  const [taskName, setTaskName] = useState("");
-  const [taskDescription, setTaskDescription] = useState("");
-  const [taskPriority, setTaskPriority] = useState("medium");
-  const [dueDate, setDueDate] = useState("");
-
-  const handleTaskNameChange = (e) => {
-    setTaskName(e.target.value);
-  };
-
-  const handleTaskDescriptionChange = (e) => {
-    setTaskDescription(e.target.value);
-  };
-
-  const handleTaskPriorityChange = (e) => {
+  const { onCreateTaskSubmit } = useTaskContext();
+  // set initial values to the state variables
+  const [taskPriority, setTaskPriority] = useState("");
+  const taskPriorityChange = (e) => {
     setTaskPriority(e.target.value);
   };
 
-  const handleDueDateChange = (e) => {
-    setDueDate(e.target.value);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Add logic to handle task creation
-    console.log(
-      "Task created:",
-      taskName,
-      taskDescription,
+  const { values, changeHandler, onSubmit } = useForm(
+    {
+      taskName: "",
       taskPriority,
-      dueDate
-    );
-    // Add additional logic, like sending the data to a server or updating the state
-  };
+      description: "",
+      dueDate: "",
+    },
+    onCreateTaskSubmit
+  );
 
   return (
     <section className={styles.createTaskPage}>
-      <form className={styles.createTaskForm} onSubmit={handleSubmit}>
+      <form className={styles.createTaskForm} onSubmit={onSubmit}>
         <h2>Create Task</h2>
         <Link className={`${styles.link} ${styles["center-text"]}`} to="/">
           <img src="/images/logo.png" alt="logo" />
@@ -55,20 +40,20 @@ export default function CreateTask() {
                 name="taskName"
                 type="text"
                 placeholder="Enter task name"
-                value={taskName}
-                onChange={handleTaskNameChange}
+                value={values.taskName}
+                onChange={changeHandler}
                 required
               />
             </div>
 
             <div className={styles.formGroup}>
-              <label htmlFor="taskDescription">Task Description:</label>
+              <label htmlFor="description">Task Description:</label>
               <textarea
-                id="taskDescription"
-                name="taskDescription"
+                id="description"
+                name="description"
                 placeholder="Enter task description"
-                value={taskDescription}
-                onChange={handleTaskDescriptionChange}
+                value={values.description}
+                onChange={changeHandler}
                 required
               />
             </div>
@@ -82,7 +67,7 @@ export default function CreateTask() {
                 id="taskPriority"
                 name="taskPriority"
                 value={taskPriority}
-                onChange={handleTaskPriorityChange}
+                onChange={taskPriorityChange}
               >
                 <option value="high">High</option>
                 <option value="medium">Medium</option>
@@ -96,8 +81,8 @@ export default function CreateTask() {
                 id="dueDate"
                 name="dueDate"
                 type="date"
-                value={dueDate}
-                onChange={handleDueDateChange}
+                value={values.dueDate}
+                onChange={changeHandler}
               />
             </div>
           </div>

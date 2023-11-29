@@ -57,7 +57,7 @@ export const AuthProvider = ({ children }) => {
     </>
   );
 };
-// custom hook used for importing context in LOgin for example
+// custom hook used for importing context in Login for example
 export const useAuthContext = () => {
   const context = useContext(AuthContext);
   return context;
