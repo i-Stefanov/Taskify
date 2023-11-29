@@ -1452,7 +1452,7 @@
       "1840a313-225c-416a-817a-9954d4609f7c": {
         _ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
         taskName: "Log in",
-        priority: "High",
+        taskPriority: "High",
         description: "Log in",
         dueDate: 1617194210928,
         isCompleted: false,
@@ -1462,7 +1462,7 @@
       "126777f5-3277-42ad-b874-76d043b069cb": {
         _ownerId: "847ec027-f659-4086-8032-5173e2f9c93a",
         taskName: "Check daily schedule",
-        priority: "High",
+        taskPriority: "High",
         description: "Check daily schedule",
         dueDate: 1617194210928,
         isCompleted: false,
