@@ -12,55 +12,12 @@ import CreateTask from "./components/CreateTask/CreateTask";
 import TaskList from "./components/TaskList/TaskList";
 import TaskCard from "./components/TaskCard/TaskCard";
 import User from "./components/UserProfile/UserPrifile";
-import { AuthContext } from "./contexts/AuthContext";
+import { AuthProvider } from "./contexts/AuthContext";
 import { authServiceFactory } from "./services/authService";
 
 function App() {
-  const navigate = useNavigate();
-  const [auth, setAuth] = useState({});
-  const authService = authServiceFactory(auth.accessToken);
-  const onRegisterSubmit = async (data) => {
-    const { confirmPassword, ...userData } = data;
-    try {
-      if (confirmPassword !== userData.password) {
-        throw new Error("Passwords don't match!");
-      }
-      const result = await authService.register(userData);
-      setAuth(result);
-      console.log(result);
-      navigate("/");
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  const onLoginSubmit = async (data) => {
-    try {
-      const result = await authService.login(data);
-      console.log(result);
-      setAuth(result);
-      navigate("/");
-      return result;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  // const onLogout = async () => {
-  //   // todo authorized request
-  //   // await authService.logout();
-  //   setAuth({});
-  // };
-  const context = {
-    onRegisterSubmit,
-    onLoginSubmit,
-    // onLogout,
-    userId: auth._id,
-    token: auth.accessToken,
-    userEmail: auth.email,
-    // double negation !! translates the truthy values to true and tha falsy values to false similar to Boolean(value)
-    isAuthenticated: !!auth.accessToken,
-  };
   return (
-    <AuthContext.Provider value={context}>
+    <AuthProvider>
       <div>
         <Navbar />
         <main className="content">
@@ -69,7 +26,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            {/* <Route path="/logout" element={<Logout />} /> */}
+            <Route path="/logout" element={<Logout />} />
             <Route path="/create" element={<CreateTask />} />
             <Route path="/users/:userId" element={<User user={testUser} />} />
             <Route path="/tasklist" element={<TaskList tasks={tasks} />} />
@@ -78,7 +35,7 @@ function App() {
         </main>
         <Footer />
       </div>
-    </AuthContext.Provider>
+    </AuthProvider>
   );
 }
 
