@@ -14,7 +14,7 @@ import TaskCard from "./components/TaskCard/TaskCard";
 import User from "./components/UserProfile/UserPrifile";
 import { AuthProvider } from "./contexts/AuthContext";
 import { authServiceFactory } from "./services/authService";
-import { TaskProvider } from "./contexts/taskContext";
+import { TaskProvider } from "./contexts/TaskContext";
 
 function App() {
   return (
