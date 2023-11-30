@@ -15,14 +15,12 @@ export default function Navbar() {
           </Link>
         </section>
         <ul>
-          {/* <!--Users and Guest--> */}
           <li>
             <Link className={styles.link} to="/">
               Home
             </Link>
           </li>
 
-          {/* <!--Only Guest--> */}
           {!isAuthenticated && (
             <>
               <li>
@@ -39,8 +37,6 @@ export default function Navbar() {
           )}
           {isAuthenticated && (
             <>
-              {/* <!--Only Users--> */}
-
               <li>
                 <Link className={styles.link} to="/tasklist">
                   Tasks

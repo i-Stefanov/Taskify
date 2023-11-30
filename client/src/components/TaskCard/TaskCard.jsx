@@ -35,7 +35,6 @@ export default function TaskCard({
         <Link to={`/tasklist/${_id}`} className={styles.detailsLink}>
           Details
         </Link>
-        <Link className={styles.detailsLink}>Delete</Link>
       </div>
     </div>
   );

@@ -3,7 +3,7 @@ import { TaskContext } from "../../contexts/TaskContext";
 import { taskServiceFactory } from "../../services/taskService";
 import styles from "./TaskDetails.module.css";
 import { useService } from "../../hooks/useservice";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export default function TaskDetails() {
   const taskService = useService(taskServiceFactory);
@@ -54,11 +54,14 @@ export default function TaskDetails() {
 
         <p className={styles.dueDate}>Due Date: {dueDate}</p>
         <div className={styles.description}>
+          <h2>Description</h2>
           <p>{description}</p>
         </div>
         <div className={styles.buttons}>
-          <button type="submit">Edit</button>
-          <button type="submit">Delete</button>
+          <Link to={`/tasklist/${_id}/edit`}>
+            <button className={styles.button}>Edit</button>
+          </Link>
+          <button className={styles.button}>Delete</button>
         </div>
       </div>
     </section>

@@ -67,7 +67,7 @@ textarea:hover {
   height: 40px; /* Increase height */
 }
 
-h2 {
+.heading {
   font-size: 1.5rem;
   margin-bottom: 20px;
   align-self: center;
@@ -93,8 +93,9 @@ textarea {
   box-sizing: border-box;
 }
 
-button {
-  background-color: #007bff;
+.btn {
+  background-color: #0056b3;
+
   color: #fff;
   padding: 10px;
   border: none;
@@ -105,8 +106,8 @@ button {
   transition: all ease-out 0.3s;
 }
 
-button:hover {
-  background-color: #0056b3;
+.btn:hover {
+  background-color: #007bff;
 }
 
 .field {

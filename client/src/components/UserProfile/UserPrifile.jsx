@@ -6,9 +6,13 @@ export default function User() {
   return (
     <section className={styles.userComponent}>
       <div className={styles.userCard}>
+        <img
+          className={styles.userImg}
+          src="/images/userImg.jpg"
+          alt="userImage"
+        />
         <h3 className={styles.username}>{userEmail.split("@")[0]}</h3>
         <p className={styles.email}>Email: {userEmail}</p>
-        <p className={styles.userId}>User ID: {userId}</p>
       </div>
     </section>
   );

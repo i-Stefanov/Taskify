@@ -18,14 +18,15 @@ export default function Register() {
   return (
     <section className={styles.registerPage}>
       <form className={styles.registerForm} method="POST" onSubmit={onSubmit}>
-        <img src="./images/logo.png" alt="logo" />
-        <h2>Register</h2>
+        <img className={styles.imgClass} src="./images/logo.png" alt="logo" />
+        <h2 className={styles.registerHeading}>Register</h2>
         <div className={styles.onDark}>
           <label htmlFor="email">Email:</label>
           <input
             id="email"
             name="email"
             type="text"
+            className={styles.inputClass}
             placeholder="steven@abv.bg"
             onChange={changeHandler}
             value={values.username}
@@ -38,6 +39,7 @@ export default function Register() {
             id="password"
             name="password"
             type="password"
+            className={styles.inputClass}
             onChange={changeHandler}
             placeholder="********"
             value={values.password}
@@ -50,6 +52,7 @@ export default function Register() {
             id="confirmPassword"
             name="confirmPassword"
             type="password"
+            className={styles.inputClass}
             onChange={changeHandler}
             placeholder="********"
             value={values.repeatPassword}

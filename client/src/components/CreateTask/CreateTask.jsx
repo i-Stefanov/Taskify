@@ -20,7 +20,7 @@ export default function CreateTask() {
   return (
     <section className={styles.createTaskPage}>
       <form className={styles.createTaskForm} onSubmit={onSubmit}>
-        <h2>Create Task</h2>
+        <h2 className={styles.heading}>Create Task</h2>
         <Link className={`${styles.link} ${styles["center-text"]}`} to="/">
           <img src="/images/logo.png" alt="logo" />
           <span>Taskify</span>

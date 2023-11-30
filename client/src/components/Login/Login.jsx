@@ -16,8 +16,9 @@ export default function Login() {
   return (
     <section className={styles.loginPage}>
       <form className={styles.loginForm} method="POST" onSubmit={onSubmit}>
-        <img src="/images/logo.png" alt="logo" />
-        <h2>Login</h2>
+        <img className={styles.logoImg} src="/images/logo.png" alt="logo" />
+
+        <h2 className={styles.loginHeading}>Login</h2>
 
         <div>
           <label htmlFor="email">Email:</label>
@@ -25,6 +26,7 @@ export default function Login() {
             id="email"
             name="email"
             type="text"
+            className={styles.inputClass}
             placeholder="name@abv.bg"
             value={values.username}
             onChange={changeHandler}
@@ -37,13 +39,14 @@ export default function Login() {
             id="password"
             name="password"
             type="password"
+            className={styles.inputClass}
             placeholder="********"
             value={values.password}
             onChange={changeHandler}
           />
         </div>
 
-        <button className="btn" type="submit">
+        <button className={styles.btn} type="submit">
           Login
         </button>
 

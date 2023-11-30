@@ -26,18 +26,28 @@
 }
 
 .description {
-  color: #555;
+  color: #040073;
 }
 .actions {
   display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 1rem;
 }
 .detailsLink {
+  text-align: center;
   color: aliceblue;
   text-decoration: none;
   font-weight: bold;
-  border: 2px solid #007bff;
-  background-color: #007bff;
+
+  border: 2px solid #003f82;
+  background-color: #003f82;
   border-radius: 4px;
-  padding: 3px;
+  padding: 5px 25px;
+  transition: all ease-in 0.1s;
+}
+.detailsLink:hover {
+  background-color: #006ee3;
+  border: 2px solid #006ee3;
+  transform: scale(1.1);
 }
