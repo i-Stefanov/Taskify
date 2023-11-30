@@ -62,7 +62,7 @@ export default function Register() {
 
         <p className={styles.field}>
           <span>
-            If you have a profile click <Link href="#">here</Link>
+            If you have a profile click <Link to="/login">here</Link>
           </span>
         </p>
       </form>
