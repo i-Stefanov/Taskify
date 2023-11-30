@@ -1,18 +1,35 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import styles from "./CreateTask.module.css";
 import { taskServiceFactory } from "../../services/taskService";
 import { useService } from "../../hooks/useservice";
+import styles from "./EditTask.module.css";
 import { useForm } from "../../hooks/useForm";
 import { useTaskContext } from "../../contexts/TaskContext";
 
 export default function EditTask() {
-  const editService = useService(taskServiceFactory);
+  const taskService = useService(taskServiceFactory);
   const { taskId } = useParams();
+  const { onTaskEditSubmit } = useTaskContext();
+
+  const { values, changeHandler, onSubmit, changeValues } = useForm(
+    {
+      taskName: "",
+      taskPriority: "",
+      description: "",
+      dueDate: "",
+    },
+    onTaskEditSubmit
+  );
+  useEffect(() => {
+    taskService
+      .getOne(taskId)
+      .then((result) => changeValues(result))
+      .catch((err) => console.log(err));
+  }, [taskId]);
   return (
     <section className={styles.editTaskPage}>
       <form className={styles.editTaskForm} onSubmit={onSubmit}>
-        <h2>Create Task</h2>
+        <h2 className={styles.editHeading}>Edit Task</h2>
         <Link className={`${styles.link} ${styles["center-text"]}`} to="/">
           <img src="/images/logo.png" alt="logo" />
           <span>Taskify</span>

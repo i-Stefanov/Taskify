@@ -63,11 +63,11 @@ textarea:hover {
 .formGroup select {
   width: 100%;
   font-size: 1rem; /* Increase font size */
-  padding: 10px; /* Add padding */
+  padding: 23px; /* Add padding */
   height: 40px; /* Increase height */
 }
 
-h2 {
+.editHeading {
   font-size: 1.5rem;
   margin-bottom: 20px;
   align-self: center;
@@ -87,14 +87,14 @@ label {
 input,
 textarea {
   width: 100%;
-  padding: 10px;
+  padding: 15px;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
 }
 
-button {
-  background-color: #007bff;
+.btn {
+  background-color: #05008d;
   color: #fff;
   padding: 10px;
   border: none;
@@ -102,10 +102,11 @@ button {
   cursor: pointer;
   width: 30%;
   font-size: 1rem;
+  align-self: center;
   transition: all ease-out 0.3s;
 }
 
-button:hover {
+.btn:hover {
   background-color: #0056b3;
 }
 

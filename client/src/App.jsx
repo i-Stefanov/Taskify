@@ -13,6 +13,7 @@ import TaskList from "./components/TaskList/TaskList";
 import TaskCard from "./components/TaskCard/TaskCard";
 import TaskDetails from "./components/TaskDetails/TaskDetails";
 import User from "./components/UserProfile/UserPrifile";
+import EditTask from "./components/EditTask/EditTask";
 import { AuthProvider } from "./contexts/AuthContext";
 import { authServiceFactory } from "./services/authService";
 import { TaskProvider } from "./contexts/TaskContext";
@@ -31,8 +32,10 @@ function App() {
               <Route path="/register" element={<Register />} />
               <Route path="/logout" element={<Logout />} />
               <Route path="/create" element={<CreateTask />} />
-              <Route path="/users/:userId" element={<User user={testUser} />} />
+              <Route path="/users/:userId" element={<User />} />
               <Route path="/tasklist" element={<TaskList />} />
+              <Route path="/tasklist/:taskId/edit" element={<EditTask />} />
+
               <Route path="/tasklist/:taskId" element={<TaskDetails />} />
             </Routes>
           </main>
