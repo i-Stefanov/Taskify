@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import { tasks, testUser } from "./assets/dummyData";
+import { testUser } from "./assets/dummyData";
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./components/Home/Home";
 import Footer from "./components/Footer/Footer";
@@ -11,6 +11,7 @@ import Logout from "./components/Logout/Logout";
 import CreateTask from "./components/CreateTask/CreateTask";
 import TaskList from "./components/TaskList/TaskList";
 import TaskCard from "./components/TaskCard/TaskCard";
+import TaskDetails from "./components/TaskDetails/TaskDetails";
 import User from "./components/UserProfile/UserPrifile";
 import { AuthProvider } from "./contexts/AuthContext";
 import { authServiceFactory } from "./services/authService";
@@ -32,7 +33,7 @@ function App() {
               <Route path="/create" element={<CreateTask />} />
               <Route path="/users/:userId" element={<User user={testUser} />} />
               <Route path="/tasklist" element={<TaskList />} />
-              <Route path="/tasklist/:taskId" element={<TaskCard />} />
+              <Route path="/tasklist/:taskId" element={<TaskDetails />} />
             </Routes>
           </main>
           <Footer />
