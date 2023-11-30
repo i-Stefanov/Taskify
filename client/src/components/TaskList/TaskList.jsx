@@ -1,7 +1,7 @@
 import React from "react";
 import TaskCard from "../TaskCard/TaskCard";
 import styles from "./TaskList.module.css";
-import { useTaskContext } from "../../contexts/taskContext";
+import { useTaskContext } from "../../contexts/TaskContext";
 
 export default function TaskList() {
   const { tasks } = useTaskContext();

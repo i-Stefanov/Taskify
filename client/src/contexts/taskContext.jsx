@@ -28,6 +28,9 @@ export const TaskProvider = ({ children }) => {
     );
     navigate(`/tasklist/${values._id}`);
   };
+  const getTaskFromState = (taskId) => {
+    return tasks.find((task) => task._id === taskId);
+  };
   const deleteTask = (taskId) => {
     setTasks((tasks) => tasks.filter((task) => task._id !== taskId));
   };
@@ -36,6 +39,7 @@ export const TaskProvider = ({ children }) => {
     tasks,
     onCreateTaskSubmit,
     onTaskEditSubmit,
+    getTaskFromState,
     deleteTask,
   };
   return (
