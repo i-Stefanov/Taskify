@@ -1,14 +1,16 @@
 import { useContext, useEffect, useState } from "react";
-import { TaskContext } from "../../contexts/TaskContext";
+import { useTaskContext } from "../../contexts/TaskContext";
 import { taskServiceFactory } from "../../services/taskService";
 import styles from "./TaskDetails.module.css";
-import { useService } from "../../hooks/useservice";
-import { Link, useParams } from "react-router-dom";
+import { useService } from "../../hooks/useService";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 export default function TaskDetails() {
+  const navigate = useNavigate();
   const taskService = useService(taskServiceFactory);
   const { taskId } = useParams();
   const [currentTask, setCurrentTask] = useState({});
+  const { deleteTask } = useTaskContext();
   useEffect(() => {
     taskService.getOne(taskId).then((result) =>
       setCurrentTask({
@@ -18,6 +20,18 @@ export default function TaskDetails() {
       })
     );
   }, [taskId]);
+  const onDeleteClick = async () => {
+    const deleteConfirm = confirm(
+      `Are you sure you want to delete: ${currentTask.taskName}`
+    );
+    if (deleteConfirm) {
+      // delete task from server
+      await taskService.delete(currentTask._id);
+      // delete task from state
+      deleteTask(currentTask._id);
+      navigate("/tasklist");
+    }
+  };
 
   const {
     taskName,
@@ -61,7 +75,9 @@ export default function TaskDetails() {
           <Link to={`/tasklist/${_id}/edit`}>
             <button className={styles.button}>Edit</button>
           </Link>
-          <button className={styles.button}>Delete</button>
+          <button onClick={onDeleteClick} className={styles.button}>
+            Delete
+          </button>
         </div>
       </div>
     </section>
