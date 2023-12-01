@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { taskServiceFactory } from "../../services/taskService";
-import { useService } from "../../hooks/useservice";
 import styles from "./EditTask.module.css";
 import { useForm } from "../../hooks/useForm";
 import { useTaskContext } from "../../contexts/TaskContext";
+import { useService } from "../../hooks/useService";
 
 export default function EditTask() {
   const taskService = useService(taskServiceFactory);
@@ -23,7 +23,9 @@ export default function EditTask() {
   useEffect(() => {
     taskService
       .getOne(taskId)
-      .then((result) => changeValues(result))
+      .then((result) => {
+        changeValues(result);
+      })
       .catch((err) => console.log(err));
   }, [taskId]);
   return (
