@@ -1,7 +1,5 @@
-import { useState } from "react";
 import "./App.css";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import { testUser } from "./assets/dummyData";
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./components/Home/Home";
 import Footer from "./components/Footer/Footer";
@@ -15,8 +13,8 @@ import TaskDetails from "./components/TaskDetails/TaskDetails";
 import User from "./components/UserProfile/UserPrifile";
 import EditTask from "./components/EditTask/EditTask";
 import { AuthProvider } from "./contexts/AuthContext";
-import { authServiceFactory } from "./services/authService";
 import { TaskProvider } from "./contexts/TaskContext";
+import { RouteGuard } from "./components/common/RouteGuard";
 
 function App() {
   return (
@@ -31,10 +29,12 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/logout" element={<Logout />} />
-              <Route path="/create" element={<CreateTask />} />
+              <Route element={<RouteGuard />}>
+                <Route path="/create" element={<CreateTask />} />
+                <Route path="/tasklist/:taskId/edit" element={<EditTask />} />
+              </Route>
               <Route path="/users/:userId" element={<User />} />
               <Route path="/tasklist" element={<TaskList />} />
-              <Route path="/tasklist/:taskId/edit" element={<EditTask />} />
 
               <Route path="/tasklist/:taskId" element={<TaskDetails />} />
             </Routes>
