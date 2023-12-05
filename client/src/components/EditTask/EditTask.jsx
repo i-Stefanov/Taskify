@@ -10,24 +10,36 @@ export default function EditTask() {
   const taskService = useService(taskServiceFactory);
   const { taskId } = useParams();
   const { onTaskEditSubmit } = useTaskContext();
+  const [taskPriority, setSelectOptions] = useState("");
 
+  const selectOptionHandler = (e) => {
+    const selectedOption = e.target.value;
+
+    setSelectOptions(selectedOption);
+
+    changeHandler({ target: { name: "taskPriority", value: selectedOption } });
+  };
   const { values, changeHandler, onSubmit, changeValues } = useForm(
     {
       taskName: "",
-      taskPriority: "",
       description: "",
+      // taskPriority: "",
       dueDate: "",
     },
     onTaskEditSubmit
   );
+
   useEffect(() => {
     taskService
       .getOne(taskId)
       .then((result) => {
+        // console.log("result",result)
         changeValues(result);
+        setSelectOptions(result.taskPriority);
       })
       .catch((err) => console.log(err));
   }, [taskId]);
+
   return (
     <section className={styles.editTaskPage}>
       <form className={styles.editTaskForm} onSubmit={onSubmit}>
@@ -51,29 +63,13 @@ export default function EditTask() {
                 required
               />
             </div>
-
-            <div className={styles.formGroup}>
-              <label htmlFor="description">Task Description:</label>
-              <textarea
-                id="description"
-                name="description"
-                placeholder="Enter task description"
-                value={values.description}
-                onChange={changeHandler}
-                required
-              />
-            </div>
-          </div>
-
-          {/* Second Column */}
-          <div className={styles.formColumn}>
             <div className={styles.formGroup}>
               <label htmlFor="taskPriority">Task Priority:</label>
               <select
                 id="taskPriority"
                 name="taskPriority"
-                value={values.taskPriority}
-                onChange={changeHandler}
+                value={taskPriority}
+                onChange={selectOptionHandler}
               >
                 <option value="high">High</option>
                 <option value="medium">Medium</option>
@@ -89,6 +85,22 @@ export default function EditTask() {
                 type="date"
                 value={values.dueDate}
                 onChange={changeHandler}
+              />
+            </div>
+          </div>
+
+          {/* Second Column */}
+          <div className={styles.formColumn}>
+            <div className={styles.formGroup}>
+              <label htmlFor="description">Task Description:</label>
+              <textarea
+                rows={12}
+                id="description"
+                name="description"
+                placeholder="Enter task description"
+                value={values.description}
+                onChange={changeHandler}
+                required
               />
             </div>
           </div>
