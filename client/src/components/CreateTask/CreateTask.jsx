@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./CreateTask.module.css";
 import { useForm } from "../../hooks/useForm";
@@ -10,7 +9,7 @@ export default function CreateTask() {
   const { values, changeHandler, onSubmit } = useForm(
     {
       taskName: "",
-      taskPriority: "",
+      taskPriority: "high",
       description: "",
       dueDate: "",
     },
@@ -40,25 +39,10 @@ export default function CreateTask() {
                 required
               />
             </div>
-
-            <div className={styles.formGroup}>
-              <label htmlFor="description">Task Description:</label>
-              <textarea
-                id="description"
-                name="description"
-                placeholder="Enter task description"
-                value={values.description}
-                onChange={changeHandler}
-                required
-              />
-            </div>
-          </div>
-
-          {/* Second Column */}
-          <div className={styles.formColumn}>
             <div className={styles.formGroup}>
               <label htmlFor="taskPriority">Task Priority:</label>
               <select
+                className={styles.selectStyle}
                 id="taskPriority"
                 name="taskPriority"
                 value={values.taskPriority}
@@ -78,6 +62,22 @@ export default function CreateTask() {
                 type="date"
                 value={values.dueDate}
                 onChange={changeHandler}
+              />
+            </div>
+          </div>
+
+          {/* Second Column */}
+          <div className={styles.formColumn}>
+            <div className={styles.formGroup}>
+              <label htmlFor="description">Task Description:</label>
+              <textarea
+                rows={13}
+                id="description"
+                name="description"
+                placeholder="Enter task description"
+                value={values.description}
+                onChange={changeHandler}
+                required
               />
             </div>
           </div>
