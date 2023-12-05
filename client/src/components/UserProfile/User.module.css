@@ -2,8 +2,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   margin-top: 4rem;
-  height: 40vh;
+  height: 60vh;
 }
 .userCard {
   display: flex;
@@ -43,4 +44,9 @@
   margin-bottom: 8px;
   color: #003873;
   font-size: 1.5rem;
+}
+.taskList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
