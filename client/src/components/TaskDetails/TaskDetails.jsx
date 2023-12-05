@@ -4,9 +4,12 @@ import { taskServiceFactory } from "../../services/taskService";
 import styles from "./TaskDetails.module.css";
 import { useService } from "../../hooks/useService";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { useAuthContext } from "../../contexts/AuthContext";
+import { formatDate } from "../../utils";
 
 export default function TaskDetails() {
   const navigate = useNavigate();
+  const { userId, isAuthenticated } = useAuthContext();
   const taskService = useService(taskServiceFactory);
   const { taskId } = useParams();
   const [currentTask, setCurrentTask] = useState({});
@@ -32,7 +35,6 @@ export default function TaskDetails() {
       navigate("/tasklist");
     }
   };
-
   const {
     taskName,
     dueDate,
@@ -46,16 +48,7 @@ export default function TaskDetails() {
     _ownerId,
   } = currentTask;
 
-  function formatDate(dateToFormat) {
-    if (dateToFormat) {
-      const date = new Date(dateToFormat);
-      const formatDate = Intl.DateTimeFormat("en-us", {
-        dateStyle: "short",
-      });
-      const formatedCreatedOnDate = formatDate.format(date);
-      return formatedCreatedOnDate;
-    }
-  }
+  const isOwner = userId === _ownerId;
 
   return (
     <section className={styles.detailsComponent}>
@@ -71,14 +64,16 @@ export default function TaskDetails() {
           <h2>Description</h2>
           <p>{description}</p>
         </div>
-        <div className={styles.buttons}>
-          <Link to={`/tasklist/${_id}/edit`}>
-            <button className={styles.button}>Edit</button>
-          </Link>
-          <button onClick={onDeleteClick} className={styles.button}>
-            Delete
-          </button>
-        </div>
+        {isOwner && (
+          <div className={styles.buttons}>
+            <Link to={`/tasklist/${_id}/edit`}>
+              <button className={styles.button}>Edit</button>
+            </Link>
+            <button onClick={onDeleteClick} className={styles.button}>
+              Delete
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );
