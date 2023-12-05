@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import styles from "./TaskCard.module.css";
+import { formatDate } from "../../utils";
 
 export default function TaskCard({
   _id,
@@ -15,16 +16,11 @@ export default function TaskCard({
     }
     return `${description?.slice(0, maxLength)}...`;
   };
-  //!
-  //! const date = new Date(dueDate);
-  //! const formatDate = Intl.DateTimeFormat("en-us", {
-  //!   dateStyle: "long",
-  //! });
-  //! const formatedDate = formatDate.format(date);
+
   return (
     <div className={styles.taskCard}>
       <h3 className={styles.taskName}>{taskName}</h3>
-      <p className={styles.dueDate}>Due Date: {dueDate}</p>
+      <p className={styles.dueDate}>Due Date: {formatDate(dueDate)}</p>
       <p className={styles.priority}>Priority: {taskPriority}</p>
       <p className={styles.description}>
         {/* {description} */}
