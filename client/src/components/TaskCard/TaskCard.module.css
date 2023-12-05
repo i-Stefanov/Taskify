@@ -1,5 +1,6 @@
 .taskCard {
   border: 1px solid #ccc;
+  position: relative;
   border-radius: 8px;
   padding: 16px;
   margin: 16px;
