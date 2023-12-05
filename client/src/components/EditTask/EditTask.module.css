@@ -63,7 +63,7 @@ textarea:hover {
 .formGroup select {
   width: 100%;
   font-size: 1rem; /* Increase font size */
-  padding: 23px; /* Add padding */
+  padding: 10px; /* Add padding */
   height: 40px; /* Increase height */
 }
 
