@@ -15,34 +15,36 @@ import EditTask from "./components/EditTask/EditTask";
 import { AuthProvider } from "./contexts/AuthContext";
 import { TaskProvider } from "./contexts/TaskContext";
 import { RouteGuard } from "./components/common/RouteGuard";
+import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
 
 function App() {
   return (
-    <AuthProvider>
-      <TaskProvider>
-        <div>
-          <Navbar />
-          <main className="content">
-            <Routes>
-              <Route index element={<Home />} />
-              <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/logout" element={<Logout />} />
-              <Route element={<RouteGuard />}>
-                <Route path="/create" element={<CreateTask />} />
-                <Route path="/tasklist/:taskId/edit" element={<EditTask />} />
-              </Route>
-              <Route path="/users/:userId" element={<User />} />
-              <Route path="/tasklist" element={<TaskList />} />
-
-              <Route path="/tasklist/:taskId" element={<TaskDetails />} />
-            </Routes>
-          </main>
-          <Footer />
-        </div>
-      </TaskProvider>
-    </AuthProvider>
+    <ErrorBoundary>
+      <AuthProvider>
+        <TaskProvider>
+          <div>
+            <Navbar />
+            <main className="content">
+              <Routes>
+                <Route index element={<Home />} />
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route element={<RouteGuard />}>
+                  <Route path="/logout" element={<Logout />} />
+                  <Route path="/create" element={<CreateTask />} />
+                  <Route path="/tasklist/:taskId/edit" element={<EditTask />} />
+                  <Route path="/users/:userId" element={<User />} />
+                  <Route path="/tasklist" element={<TaskList />} />
+                  <Route path="/tasklist/:taskId" element={<TaskDetails />} />
+                </Route>
+              </Routes>
+            </main>
+            <Footer />
+          </div>
+        </TaskProvider>
+      </AuthProvider>
+    </ErrorBoundary>
   );
 }
 

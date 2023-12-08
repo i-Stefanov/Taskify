@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styles from "./TaskCard.module.css";
-import { formatDate } from "../../utils";
+import { formatDate } from "../../utils/formatDate";
 
 export default function TaskCard({
   _id,

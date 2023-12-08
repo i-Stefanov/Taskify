@@ -2,55 +2,47 @@ import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { taskServiceFactory } from "../../services/taskService";
 import styles from "./EditTask.module.css";
+import { useForm } from "../../hooks/useForm";
 import { useTaskContext } from "../../contexts/TaskContext";
 import { useService } from "../../hooks/useService";
-import { useForm } from "react-hook-form";
-import { formatDate } from "../../utils/formatDate";
-import { createEditValidationSchema } from "../common/validationSchemas";
-import { yupResolver } from "@hookform/resolvers/yup";
 
 export default function EditTask() {
   const taskService = useService(taskServiceFactory);
   const { taskId } = useParams();
   const { onTaskEditSubmit } = useTaskContext();
+  const [taskPriority, setSelectOptions] = useState("");
 
-  // const [values, setValues] = useState({});
+  const selectOptionHandler = (e) => {
+    const selectedOption = e.target.value;
+
+    setSelectOptions(selectedOption);
+
+    changeHandler({ target: { name: "taskPriority", value: selectedOption } });
+  };
+  const { values, changeHandler, onSubmit, changeValues } = useForm(
+    {
+      taskName: "",
+      description: "",
+      // taskPriority: "",
+      dueDate: "",
+    },
+    onTaskEditSubmit
+  );
 
   useEffect(() => {
-    async function getTask(taskId) {
-      try {
-        const currentTask = await taskService.getOne(taskId);
-        currentTask.dueDate = new Date(currentTask.dueDate)
-          .toISOString()
-          .split("T")[0];
-        Object.entries(currentTask).forEach(([key, value]) => {
-          setValue(key, value);
-        });
-        // setValue(
-        //   "dueDate",
-        //   new Date(currentTask.dueDate).toISOString().split("T")[0]
-        // );
-        setValue("taskPriority", currentTask.taskPriority.toLowerCase());
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    getTask(taskId);
+    taskService
+      .getOne(taskId)
+      .then((result) => {
+        // console.log("result",result)
+        changeValues(result);
+        setSelectOptions(result.taskPriority);
+      })
+      .catch((err) => console.log(err));
   }, [taskId]);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(createEditValidationSchema),
-  });
 
   return (
     <section className={styles.editTaskPage}>
-      <form
-        className={styles.editTaskForm}
-        onSubmit={handleSubmit(onTaskEditSubmit)}
-      >
+      <form className={styles.editTaskForm} onSubmit={onSubmit}>
         <h2 className={styles.editHeading}>Edit Task</h2>
         <Link className={`${styles.link} ${styles["center-text"]}`} to="/">
           <img src="/images/logo.png" alt="logo" />
@@ -62,45 +54,38 @@ export default function EditTask() {
             <div className={styles.formGroup}>
               <label htmlFor="taskName">Task Name:</label>
               <input
-                className={styles.inputStyle}
                 id="taskName"
                 name="taskName"
                 type="text"
                 placeholder="Enter task name"
-                {...register("taskName")}
+                value={values.taskName}
+                onChange={changeHandler}
+                required
               />
-              {errors.taskName && (
-                <p className={styles.error}>{errors.taskName.message}</p>
-              )}
             </div>
             <div className={styles.formGroup}>
               <label htmlFor="taskPriority">Task Priority:</label>
               <select
                 id="taskPriority"
                 name="taskPriority"
-                {...register("taskPriority")}
+                value={taskPriority}
+                onChange={selectOptionHandler}
               >
                 <option value="high">High</option>
                 <option value="medium">Medium</option>
                 <option value="low">Low</option>
               </select>
-              {errors.taskPriority && (
-                <p className={styles.error}>{errors.taskPriority.message}</p>
-              )}
             </div>
 
             <div className={styles.formGroup}>
               <label htmlFor="dueDate">Due Date:</label>
               <input
-                className={styles.inputStyle}
                 id="dueDate"
                 name="dueDate"
                 type="date"
-                {...register("dueDate")}
+                value={values.dueDate}
+                onChange={changeHandler}
               />
-              {errors.dueDate && (
-                <p className={styles.error}>{errors.dueDate.message}</p>
-              )}
             </div>
           </div>
 
@@ -109,16 +94,14 @@ export default function EditTask() {
             <div className={styles.formGroup}>
               <label htmlFor="description">Task Description:</label>
               <textarea
-                className={styles.inputStyle}
                 rows={12}
                 id="description"
                 name="description"
                 placeholder="Enter task description"
-                {...register("description")}
+                value={values.description}
+                onChange={changeHandler}
+                required
               />
-              {errors.description && (
-                <p className={styles.error}>{errors.description.message}</p>
-              )}
             </div>
           </div>
         </div>

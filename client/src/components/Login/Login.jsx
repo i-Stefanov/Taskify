@@ -1,21 +1,29 @@
 import { Link } from "react-router-dom";
+// import Snackbar from "../Snackbar/Snackbar";
 import styles from "./Login.module.css";
-import { useContext } from "react";
-import { AuthContext } from "../../contexts/AuthContext";
-import { useForm } from "../../hooks/useForm";
+import { useAuthContext } from "../../contexts/AuthContext";
+import { useForm } from "react-hook-form";
+import { loginValidationSchema } from "../common/validationSchemas";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 export default function Login() {
-  const { onLoginSubmit } = useContext(AuthContext);
-  const { values, changeHandler, onSubmit } = useForm(
-    {
-      email: "",
-      password: "",
-    },
-    onLoginSubmit
-  );
+  const { onLoginSubmit } = useAuthContext();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(loginValidationSchema),
+  });
+
   return (
     <section className={styles.loginPage}>
-      <form className={styles.loginForm} method="POST" onSubmit={onSubmit}>
+      <form
+        className={styles.loginForm}
+        method="POST"
+        onSubmit={handleSubmit(onLoginSubmit)}
+      >
         <img className={styles.logoImg} src="/images/logo.png" alt="logo" />
 
         <h2 className={styles.loginHeading}>Login</h2>
@@ -28,9 +36,11 @@ export default function Login() {
             type="text"
             className={styles.inputClass}
             placeholder="name@abv.bg"
-            value={values.username}
-            onChange={changeHandler}
+            {...register("email")}
           />
+          {errors.email && (
+            <p className={styles.error}>{errors.email.message}</p>
+          )}
         </div>
 
         <div>
@@ -41,9 +51,11 @@ export default function Login() {
             type="password"
             className={styles.inputClass}
             placeholder="********"
-            value={values.password}
-            onChange={changeHandler}
+            {...register("password")}
           />
+          {errors.password && (
+            <p className={styles.error}>{errors.password.message}</p>
+          )}
         </div>
 
         <button className={styles.btn} type="submit">

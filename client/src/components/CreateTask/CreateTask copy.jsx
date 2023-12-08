@@ -1,28 +1,24 @@
 import { Link } from "react-router-dom";
 import styles from "./CreateTask.module.css";
-// import { useForm } from "../../hooks/useForm";
+import { useForm } from "../../hooks/useForm";
 import { useTaskContext } from "../../contexts/TaskContext";
-import { useForm } from "react-hook-form";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { createEditValidationSchema } from "../common/validationSchemas";
 
 export default function CreateTask() {
   const { onCreateTaskSubmit } = useTaskContext();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(createEditValidationSchema),
-  });
-  console.log(errors.dueDate);
+
+  const { values, changeHandler, onSubmit } = useForm(
+    {
+      taskName: "",
+      taskPriority: "high",
+      description: "",
+      dueDate: "",
+    },
+    onCreateTaskSubmit
+  );
+
   return (
     <section className={styles.createTaskPage}>
-      <form
-        className={styles.createTaskForm}
-        onSubmit={handleSubmit(onCreateTaskSubmit)}
-      >
+      <form className={styles.createTaskForm} onSubmit={onSubmit}>
         <h2 className={styles.heading}>Create Task</h2>
         <Link className={`${styles.link} ${styles["center-text"]}`} to="/">
           <img src="/images/logo.png" alt="logo" />
@@ -34,16 +30,14 @@ export default function CreateTask() {
             <div className={styles.formGroup}>
               <label htmlFor="taskName">Task Name:</label>
               <input
-                className={styles.inputStyle}
                 id="taskName"
                 name="taskName"
                 type="text"
                 placeholder="Enter task name"
-                {...register("taskName")}
+                value={values.taskName}
+                onChange={changeHandler}
+                required
               />
-              {errors.taskName && (
-                <p className={styles.error}>{errors.taskName.message}</p>
-              )}
             </div>
             <div className={styles.formGroup}>
               <label htmlFor="taskPriority">Task Priority:</label>
@@ -51,30 +45,24 @@ export default function CreateTask() {
                 className={styles.selectStyle}
                 id="taskPriority"
                 name="taskPriority"
-                {...register("taskPriority")}
+                value={values.taskPriority}
+                onChange={changeHandler}
               >
                 <option value="high">High</option>
                 <option value="medium">Medium</option>
                 <option value="low">Low</option>
               </select>
-              {errors.taskPriority && (
-                <p className={styles.error}>{errors.taskPriority.message}</p>
-              )}
             </div>
 
             <div className={styles.formGroup}>
               <label htmlFor="dueDate">Due Date:</label>
               <input
-                className={styles.inputStyle}
                 id="dueDate"
                 name="dueDate"
                 type="date"
-                // defaultValue={new Date().toISOString().split("T")[0]}
-                {...register("dueDate")}
+                value={values.dueDate}
+                onChange={changeHandler}
               />
-              {errors.dueDate && (
-                <p className={styles.error}>{errors.dueDate.message}</p>
-              )}
             </div>
           </div>
 
@@ -83,17 +71,14 @@ export default function CreateTask() {
             <div className={styles.formGroup}>
               <label htmlFor="description">Task Description:</label>
               <textarea
-                className={styles.inputStyle}
                 rows={13}
                 id="description"
                 name="description"
                 placeholder="Enter task description"
-                {...register("description")}
-                // required
+                value={values.description}
+                onChange={changeHandler}
+                required
               />
-              {errors.description && (
-                <p className={styles.error}>{errors.description.message}</p>
-              )}
             </div>
           </div>
         </div>

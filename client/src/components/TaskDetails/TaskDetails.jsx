@@ -5,7 +5,7 @@ import styles from "./TaskDetails.module.css";
 import { useService } from "../../hooks/useService";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useAuthContext } from "../../contexts/AuthContext";
-import { formatDate } from "../../utils";
+import { formatDate } from "../../utils/formatDate";
 
 export default function TaskDetails() {
   const navigate = useNavigate();
